@@ -24,6 +24,7 @@ import static com.google.common.base.Preconditions.checkPositionIndexes;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.CollectPreconditions.checkNonnegative;
 import static com.google.common.collect.CollectPreconditions.checkRemove;
+import static com.google.common.collect.ObjectArrays.checkElementsNotNull;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
@@ -102,7 +103,7 @@ public final class Lists {
   @SafeVarargs
   @GwtCompatible(serializable = true)
   public static <E extends @Nullable Object> ArrayList<E> newArrayList(E... elements) {
-    checkNotNull(elements); // for GWT
+    checkElementsNotNull(elements); // for GWT
     // Avoid integer overflow when a large array is passed in
     int capacity = computeArrayListCapacity(elements.length);
     ArrayList<E> list = new ArrayList<>(capacity);

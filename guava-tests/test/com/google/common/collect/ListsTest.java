@@ -21,6 +21,7 @@ import static com.google.common.collect.testing.IteratorFeature.UNMODIFIABLE;
 import static com.google.common.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
+import static org.junit.Assert.assertThrows;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
@@ -353,6 +354,16 @@ public class ListsTest extends TestCase {
   public void testNewArrayListVarArgs() {
     ArrayList<Integer> list = Lists.newArrayList(0, 1, 1);
     assertEquals(SOME_COLLECTION, list);
+  }
+
+  public void testNewArrayListVarArgs_nullObject() {
+    assertThrows(NullPointerException.class, () -> {
+      Lists.newArrayList((Object) null);
+    });
+
+    assertThrows(NullPointerException.class, () -> {
+      Lists.newArrayList(new Integer[10]);
+    });
   }
 
   public void testComputeArrayListCapacity() {
